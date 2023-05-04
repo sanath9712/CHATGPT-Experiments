@@ -1,7 +1,8 @@
 import csv
 import openai
 import os
-from helpers.utilities import Topics, RandomFactPrompts, APIKeys
+from helpers.promptgenerator import Topics, RandomFactPrompts
+from helpers.utilities import APIKeys
 
 # set up ChatGPT API credentials
 openaikey = APIKeys()
@@ -37,8 +38,20 @@ def generate_text(prompt):
 
 
 def prompt_chatgpt(topics):
-    # Create a CSV file for storing the prompt and response data
-    with open(os.path.join('..', 'GeneratedData', 'RandomFacts.csv'), mode='w', newline='') as file:
+    file_path = os.path.join('..', 'GeneratedData', 'RandomFacts.csv')
+
+    # Create a dictionary to hold the topics and their random facts
+    topic_dict = {}
+
+    # Check if file exists
+    if os.path.isfile(file_path):
+        with open(file_path, 'r') as file_read:
+            reader = csv.reader(file_read)
+            next(reader)  # skip the header row
+            for row in reader:
+                topic_dict[row[0]] = row[1]
+
+    with open(file_path, 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(['Topic', 'Random Fact'])
 
@@ -46,8 +59,14 @@ def prompt_chatgpt(topics):
             prompt = RandomFactPrompts(topic).get_random_prompt()
             response = generate_text(prompt)
 
-            # Write the prompt and response data to the CSV file
-            writer.writerow([topic, response])
+            if topic in topic_dict:
+                topic_dict[topic] += '<!!!!>' + response
+            else:
+                topic_dict[topic] = response
+
+        # Write the data to the CSV file
+        for topic, fact in topic_dict.items():
+            writer.writerow([topic, fact])
 
 
 def main():
