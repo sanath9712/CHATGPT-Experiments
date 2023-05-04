@@ -8,7 +8,7 @@ Some crude ideas in mind:
 
 - Judging how much chatgpt contradicts itself in case of random facts about the same topic. For eg: An Average person takes 2000 steps a day and An Average person takes 10k steps a day are contradictory.
 
-- Repetition: How often is same fact repeated(Facts with same meaning) and what does that say about chatgpt's potential in doing the this task.
+- Repetition: How often is the same fact repeated(Facts with same meaning) and what does that say about chatgpt's potential in doing the this task.
 
 
 
