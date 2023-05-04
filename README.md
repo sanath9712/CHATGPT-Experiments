@@ -13,4 +13,4 @@ Some crude ideas in mind:
 - Validation of generated data: I intend to validate the generated data by comparing it with external resources like articles, blogs or any other piece of relevant information which can be found online and accordingly gauge to degree to which ChatGPT hallucinated while creating my data.
 
 
-For all the above ideas, experiments will be conducted with different model hyperparameters to arrive at a holistic, well rounded conclusion.
+For all the above ideas, experiments will be conducted with different model hyperparameters, datasets to arrive at a holistic, well rounded conclusion.
