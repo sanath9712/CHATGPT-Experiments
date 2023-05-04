@@ -12,4 +12,4 @@ Some crude ideas in mind:
 
 
 
-For all the above ideas, experiments will be conducted with different model hyperparameters to arrive at a holistic, well rounded conclusion
+For all the above ideas, experiments will be conducted with different model hyperparameters to arrive at a holistic, well rounded conclusion.
