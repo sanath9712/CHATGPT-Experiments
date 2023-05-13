@@ -1,6 +1,42 @@
+import csv
+import os
+
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+
 class APIKeys:
     def __init__(self):
-        self.openai_key = '<ENTER_YOUR_OPENAI_API_KEY_HERE>'
+        self.openai_key = '<ADD YOUR OPEN AI API KEY HERE>'
 
     def get_openai_key(self):
         return self.openai_key
+
+
+class DataInterpreter:
+    def __init__(self, file_path):
+        self.file_path = file_path
+
+    def write_to_firestore(self, service_account_key_path, project_id, topic_dict):
+        cred = credentials.Certificate(service_account_key_path)
+        firebase_admin.initialize_app(cred, {
+            'projectId': project_id,
+        })
+        client = firestore.client()
+
+        for topic_name, facts in topic_dict.items():
+            topic_ref = client.collection('topics').document(topic_name)
+            topic_ref.update({
+                'facts': firestore.ArrayUnion(facts)
+            })
+
+    def read_csv_file(self):
+        topic_dict = {}
+        if os.path.isfile(self.file_path):
+            with open(self.file_path, 'r') as file_read:
+                reader = csv.reader(file_read)
+                next(reader)  # skip the header row
+                for row in reader:
+                    topic_dict[row[0]] = row[1].split('<!!!!>')
+        self.write_to_firestore('firebasecred.json', '<FIREBASE PROJECT ID>', topic_dict)
+

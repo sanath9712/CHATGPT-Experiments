@@ -2,7 +2,7 @@ import csv
 import openai
 import os
 from helpers.promptgenerator import Topics, RandomFactPrompts
-from helpers.utilities import APIKeys
+from helpers.utilities import APIKeys, DataInterpreter
 
 # set up ChatGPT API credentials
 openaikey = APIKeys()
@@ -34,8 +34,8 @@ def generate_text(prompt):
     )
 
     message = response.choices[0].text.strip()
-    return message
 
+    return message
 
 def prompt_chatgpt(topics):
     file_path = os.path.join('..', 'GeneratedData', 'RandomFacts.csv')
@@ -68,11 +68,19 @@ def prompt_chatgpt(topics):
         for topic, fact in topic_dict.items():
             writer.writerow([topic, fact])
 
+        return file_path
+
+
 
 def main():
     prog = MainProgram()
     topics = prog.get_topics()
-    prompt_chatgpt(topics)
+    file_path = prompt_chatgpt(topics)
+    filereader = DataInterpreter(file_path)
+    filereader.read_csv_file()
+
+
+
 
 
 if __name__ == '__main__':
