@@ -14,3 +14,9 @@ Some crude ideas in mind:
 
 
 For all the above ideas, experiments will be conducted with different model hyperparameters, datasets to arrive at a holistic, well rounded conclusion.
+
+
+
+Instructions to run the code (For Now):
+
+Navingate to the src directory and run ```python datacreator.py```
