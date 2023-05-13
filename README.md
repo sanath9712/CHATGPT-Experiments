@@ -10,7 +10,7 @@ Some crude ideas in mind:
 
 - Repetition: How often is the same fact repeated(Facts with same meaning) and what does that say about chatgpt's performance in generating random facts. As we collect more and more random facts, it is obvious that we will see similarities. But how soon do we see similarities spring up can be analysed. We can conduct some finer analysis to determine whether Chatgpt is not able to generate more facts or if the chosen topic is restricted in its scope.
 
-- Validation of generated data: I intend to validate the generated data by comparing it with external resources like articles, blogs or any other piece of relevant information which can be found online and accordingly gauge to degree to which ChatGPT hallucinated while creating my data.
+- Validation of generated data: I intend to validate the generated data by comparing it with external resources like articles, blogs or any other piece of relevant information which can be found online and accordingly gauge the degree to which ChatGPT hallucinated while creating my data.
 
 
 For all the above ideas, experiments will be conducted with different model hyperparameters, datasets to arrive at a holistic, well rounded conclusion.
