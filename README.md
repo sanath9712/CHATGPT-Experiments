@@ -1,5 +1,5 @@
 # CHATGPT-Experiments
-This will be a repo to do series of experiments on ChatGPT. I have started with a random fact generator. I have used the Open AI API to generate random facts for topics through ChatGPT running GPT 3.5 . These generated facts are currently being stored locally in a csv file and the Firebase DB on the cloud. This will be part of a bigger project which I am not fully sure about at this point of time. Even though the end goal of this project is uncertain, what is certain is that Messi is the GOAT.
+This will be a repo to do series of experiments on ChatGPT. I have started with a random fact generator. I have used the Open AI API to generate random facts for topics through GPT 3.5 . These generated facts are currently being stored locally in a csv file and the Firebase DB on the cloud. This will be part of a bigger project which I am not fully sure about at this point of time. Even though the end goal of this project is uncertain, what is certain is that Messi is the GOAT.
 
 
 
