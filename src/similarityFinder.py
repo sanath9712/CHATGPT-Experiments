@@ -1,32 +1,36 @@
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
+from helpers.credentials import FirebaseAuth
+from helpers.utilities import DataHandler
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
 
-def fetch_topic_dict_from_firestore(service_account_key_path, project_id):
-    # Initialize Firebase Admin SDK
-    cred = credentials.Certificate(service_account_key_path)
-    firebase_admin.initialize_app(cred, {
-        'projectId': project_id,
-    })
-    client = firestore.client()
+def calculate_similarity(facts):
+    #Load the pre-trained model
+    model = SentenceTransformer('bert-base-nli-mean-tokens')
 
-    # Reference the collection containing the topics
-    collection_ref = client.collection('topics')
+    #Encode the facts into fixed-length vectors
+    fact_embeddings = model.encode(facts)
 
-    # Retrieve all documents in the collection
-    docs = collection_ref.get()
+    #Compute pairwise cosine similarity between the fact embeddings
+    similarity_matrix = cosine_similarity(fact_embeddings)
 
-    # Construct the topic_dict from Firestore data
-    topic_dict = {}
-    for doc in docs:
-        topic_name = doc.id
-        facts = doc.to_dict().get('facts', [])
-        topic_dict[topic_name] = facts
+    #Calculate the average similarity
+    overall_similarity = similarity_matrix.mean()
 
-    return topic_dict
+    return overall_similarity
 
-# Example usage:
-service_account_key_path = 'path/to/serviceAccountKey.json'
-project_id = 'your-project-id'
-topic_dict = fetch_topic_dict_from_firestore(service_account_key_path, project_id)
-print(topic_dict)
+def main():
+    data_fetcher = DataHandler()
+    firebaseauth = FirebaseAuth()
+    topic_dict = data_fetcher.fetch_topic_dict_from_firestore(firebaseauth.get_service_keyfile(),
+                                                              firebaseauth.get_project_id())
+
+    for topic in topic_dict:
+        sim_score = calculate_similarity(topic_dict[topic])
+        print("The similarity for " + topic + " is " + str(sim_score))
+
+
+
+
+
+if __name__ == '__main__':
+    main()

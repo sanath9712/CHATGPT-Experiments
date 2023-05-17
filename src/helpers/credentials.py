@@ -1,6 +1,6 @@
 class APIKeys:
     def __init__(self):
-        self.openai_key = '<ADD YOUR OPEN AI API KEY HERE>'
+        self.openai_key = '<Add your open AI api key here>'
 
     def get_openai_key(self):
         return self.openai_key
@@ -9,7 +9,7 @@ class APIKeys:
 class FirebaseAuth:
     def __init__(self):
         self.servicekeyfile = 'firebasecred.json'
-        self.project_id = '<Add your firebase project ID here>'
+        self.project_id = '<add your firebase project id>'
 
     def get_service_keyfile(self):
         return self.servicekeyfile

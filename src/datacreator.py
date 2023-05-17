@@ -2,8 +2,8 @@ import csv
 import openai
 import os
 from helpers.promptgenerator import Topics, RandomFactPrompts
-from helpers.utilities import DataInterpreter
-from helpers.creds import APIKeys
+from helpers.utilities import DataHandler
+from helpers.credentials import APIKeys
 
 # set up ChatGPT API credentials
 openaikey = APIKeys()
@@ -77,7 +77,7 @@ def main():
     prog = MainProgram()
     topics = prog.get_topics()
     file_path = prompt_chatgpt(topics)
-    filereader = DataInterpreter(file_path)
+    filereader = DataHandler(file_path)
     filereader.read_csv_file()
 
 

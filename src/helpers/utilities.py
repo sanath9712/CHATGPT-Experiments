@@ -4,10 +4,11 @@ import os
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
-from src.helpers.creds import FirebaseAuth
+from src.helpers.credentials import FirebaseAuth
 
-class DataInterpreter:
-    def __init__(self, file_path):
+
+class DataHandler:
+    def __init__(self, file_path=None):
         self.file_path = file_path
 
     def fetch_topic_dict_from_firestore(self, service_account_key_path, project_id):
